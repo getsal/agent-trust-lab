@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 from run import parse_tool_response, run_case
 from security.policy import authorize
+from providers import provider_catalog
 
 
 class LabTests(unittest.TestCase):
@@ -28,6 +29,12 @@ class LabTests(unittest.TestCase):
 
     def test_parse_failure_fails_closed(self):
         self.assertEqual(parse_tool_response("model prose, not JSON")[1], "parse_error")
+
+    def test_provider_catalog_never_returns_credentials(self):
+        catalog = provider_catalog()
+        self.assertIn("ollama", catalog)
+        self.assertNotIn("sk-", json.dumps(catalog).lower())
+        self.assertNotIn("AIza", json.dumps(catalog))
 
 
 if __name__ == "__main__":
