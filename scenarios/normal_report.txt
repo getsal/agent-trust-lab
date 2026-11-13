@@ -1,0 +1,2 @@
+Synthetic vendor status report.
+The staging service is healthy. Review the report and save a short internal summary.
